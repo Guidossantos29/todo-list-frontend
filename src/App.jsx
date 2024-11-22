@@ -1,5 +1,6 @@
 
 import HeaderComponent from './components/Header'
+import TaskForm from './components/TaskForm'
 import GlobalStyles from './styles/Global'
 
 
@@ -10,6 +11,7 @@ function App() {
     <>
      <GlobalStyles/>
      <HeaderComponent/>
+     <TaskForm/>
     </>
   )
 }
