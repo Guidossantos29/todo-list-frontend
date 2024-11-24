@@ -25,6 +25,38 @@ function App() {
     }
   }
 
+  const addTask = async (newTask) => {
+    try {
+      const response = await api.post("/tarefas",newTask)
+
+      setTarefas((prevTask) => [...prevTask,response.data])
+    } catch(error){
+      console.error('erro ao adicionar tarefa',error)
+    }
+  }
+
+  const editTask = async (taskId) => {
+    try{
+
+      await api.delete(`/tarefas/${taskId}`);
+      setTarefas((prevTask) => prevTask.filter((task) => task.id !== taskId ));
+
+    } catch(error){
+      console.error('Erro ao deletar tarefa:', error);
+    }
+  }
+
+  const deleteTask = async (taskId) => {
+    try {
+      await api.delete(`/tarefas/${taskId}`)
+      setTarefas((prevTask) => prevTask.filter((task) => task.id !== taskId))
+
+    } catch(error) {
+      console.error('Erro ao excluir tarefa:', error);
+
+    }
+  }
+
   
 
   return (
