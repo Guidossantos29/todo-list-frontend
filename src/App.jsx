@@ -4,11 +4,11 @@ import HeaderComponent from './components/Header'
 import TaskForm from './components/TaskForm'
 import GlobalStyles from './styles/Global'
 import api from './api/api';
+import TaskList from './components/TaskList';
 
 
 function App() {
   const [tarefas,setTarefas] = useState([]);
-
 
   useEffect(() =>{
     fetchTasks();
@@ -27,8 +27,11 @@ function App() {
 
   const addTask = async (newTask) => {
     try {
+
+      
       const response = await api.post("/tarefas",newTask)
 
+      
       setTarefas((prevTask) => [...prevTask,response.data])
     } catch(error){
       console.error('erro ao adicionar tarefa',error)
@@ -63,7 +66,8 @@ function App() {
     <>
      <GlobalStyles/>
      <HeaderComponent/>
-     <TaskForm/>
+     <TaskForm onAdd={addTask} tarefasExist={tarefas}/>
+     <TaskList tarefas={tarefas} onEdit={editTask} onDelete={deleteTask}/>
     </>
   )
 }
