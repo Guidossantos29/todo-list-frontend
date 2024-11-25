@@ -1,13 +1,25 @@
 import { ListContainer, TaskActions, TaskItem, EditForm } from './style';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function TaskList({ tarefas, onEdit, onDelete }) {
     const [editingTaskId, setEditingTaskId] = useState(null);
     const [editedTask, setEditedTask] = useState({});
 
+    
+    const formatDateForInput = (dateString) => {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`; 
+    };
+
     const handleEditClick = (tarefa) => {
         setEditingTaskId(tarefa.id);
-        setEditedTask(tarefa);
+        setEditedTask({
+            ...tarefa,
+            dataLimite: formatDateForInput(tarefa.dataLimite), 
+        });
     };
 
     const handleInputChange = (e) => {
@@ -53,13 +65,13 @@ function TaskList({ tarefas, onEdit, onDelete }) {
                             <button onClick={() => setEditingTaskId(null)}>Cancelar</button>
                         </EditForm>
                     ) : (
-                        <TaskItem key={tarefa.id}>
+                        <TaskItem style={{ backgroundColor: tarefa.custo >= 1000 ? 'yellow' : 'transparent' }} key={tarefa.id}>
                             <div>
                                 <strong>{tarefa.nome}</strong>
                                 <div>
-                                    <span>R$ {tarefa.custo.toFixed(2)}</span>
+                                    <span>R$ {tarefa.custo && !isNaN(tarefa.custo) ? tarefa.custo.toFixed(2) : '0.00'}</span>
                                 </div>
-                                <p>Data Limite: {new Date(tarefa.dataLimite).toLocaleDateString()}</p>
+                                <p>Data Limite: {new Date(tarefa.dataLimite).toLocaleDateString('pt-BR')}</p>
                             </div>
 
                             <TaskActions>

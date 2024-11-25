@@ -28,18 +28,20 @@ function App() {
 
   const addTask = async (newTask) => {
     try {
-
-      
-      const response = await api.post("/tarefas",newTask)
-
-      
-      setTarefas((prevTask) => [...prevTask,response.data])
-
+      const response = await api.post("/tarefas", newTask);
+  
+     
+      setTarefas((prevTasks) => {
+        const updatedTasks = [...prevTasks, response.data];
+        return updatedTasks.sort((a, b) => a.ordemApresentacao - b.ordemApresentacao);
+      });
+  
       toast.success('Tarefa criada com sucesso!');
-    } catch(error){
-      console.error('erro ao adicionar tarefa',error)
+    } catch (error) {
+      console.error('Erro ao adicionar tarefa', error);
     }
-  }
+  };
+  
 
   const editTask = async (editedTask) => {
     try {
