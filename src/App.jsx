@@ -1,5 +1,6 @@
-
 import { useEffect, useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import HeaderComponent from './components/Header'
 import TaskForm from './components/TaskForm'
 import GlobalStyles from './styles/Global'
@@ -33,6 +34,8 @@ function App() {
 
       
       setTarefas((prevTask) => [...prevTask,response.data])
+
+      toast.success('Tarefa criada com sucesso!');
     } catch(error){
       console.error('erro ao adicionar tarefa',error)
     }
@@ -41,9 +44,10 @@ function App() {
   const editTask = async (taskId) => {
     try{
 
-      await api.delete(`/tarefas/${taskId}`);
+      await api.put(`/tarefas/${taskId}`);
       setTarefas((prevTask) => prevTask.filter((task) => task.id !== taskId ));
 
+      toast.success('Tarefa atualizada com sucesso!');
     } catch(error){
       console.error('Erro ao deletar tarefa:', error);
     }
@@ -54,6 +58,7 @@ function App() {
       await api.delete(`/tarefas/${taskId}`)
       setTarefas((prevTask) => prevTask.filter((task) => task.id !== taskId))
 
+      toast.success('Tarefa excluída com sucesso!');
     } catch(error) {
       console.error('Erro ao excluir tarefa:', error);
 
@@ -68,6 +73,8 @@ function App() {
      <HeaderComponent/>
      <TaskForm onAdd={addTask} tarefasExist={tarefas}/>
      <TaskList tarefas={tarefas} onEdit={editTask} onDelete={deleteTask}/>
+
+     <ToastContainer />
     </>
   )
 }

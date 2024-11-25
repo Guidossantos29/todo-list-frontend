@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { FormContainer } from './style'
 
+
 function TaskForm({ onAdd,tarefasExist }) {
     const [task, setTask] = useState({
         nome: '',
@@ -40,6 +41,7 @@ function TaskForm({ onAdd,tarefasExist }) {
 
         setTask({ nome: "", custo: "", dataLimite: "" })
 
+        
         console.log(task);
         
 
