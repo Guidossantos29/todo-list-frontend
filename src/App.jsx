@@ -41,17 +41,23 @@ function App() {
     }
   }
 
-  const editTask = async (taskId) => {
-    try{
+  const editTask = async (editedTask) => {
+    try {
 
-      await api.put(`/tarefas/${taskId}`);
-      setTarefas((prevTask) => prevTask.filter((task) => task.id !== taskId ));
-
+      await api.put(`/tarefas/${editedTask.id}`, editedTask);
+  
+      
+      setTarefas((prevTasks) =>
+        prevTasks.map((task) =>
+          task.id === editedTask.id ? { ...task, ...editedTask } : task
+        )
+      );
+  
       toast.success('Tarefa atualizada com sucesso!');
-    } catch(error){
-      console.error('Erro ao deletar tarefa:', error);
+    } catch (error) {
+      console.error('Erro ao atualizar tarefa:', error);
     }
-  }
+  };
 
   const deleteTask = async (taskId) => {
     try {
