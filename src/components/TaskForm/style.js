@@ -11,12 +11,18 @@ export const FormContainer = styled.form`
     padding: 20px 50px 50px 50px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
-  input, button {
+  input {
     
     padding: 10px;
     border-radius: 5px;
     width: 65%;
 
+  }
+
+  button {
+    
+    padding: 10px;
+    border-radius: 5px;
   }
   
   
