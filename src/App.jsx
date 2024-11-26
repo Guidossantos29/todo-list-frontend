@@ -15,6 +15,11 @@ function App() {
     fetchTasks();
   },[])
 
+  const handleReorder = (newOrder) => {
+    setTarefas(newOrder); 
+};
+
+
   const fetchTasks = async () => {
     try{
       const response = await api.get("/tarefas");
@@ -80,7 +85,7 @@ function App() {
      <GlobalStyles/>
      <HeaderComponent/>
      <TaskForm onAdd={addTask} tarefasExist={tarefas}/>
-     <TaskList tarefas={tarefas} onEdit={editTask} onDelete={deleteTask}/>
+     <TaskList tarefas={tarefas} onEdit={editTask} onDelete={deleteTask} onReorder={handleReorder}/>
 
      <ToastContainer />
     </>

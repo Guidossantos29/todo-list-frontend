@@ -64,7 +64,7 @@ export const TaskActions = styled.div`
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    color: white;
+    color: black;
     font-size: 14px;
 
     &.edit {

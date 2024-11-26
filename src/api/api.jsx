@@ -11,6 +11,7 @@ export const getTarefas = () => api.get("/tarefas")
 export const createTarefas = (data) => api.post("/tarefas", data)
 export const updateTarefas = (id,data) =>  api.put(`/tarefas/${id}`, data)
 export const deleteTarefas = (id) =>  api.delete(`/tarefas/${id}`)
+export const reorderTarefa = (id, novaOrdem) => api.put(`/tarefas/reorder/${id}`, { novaOrdem });
 
 
 
