@@ -108,8 +108,8 @@ function TaskList({ tarefas, onEdit, onDelete, onReorder }) {
                         <TaskItem
                             style={{
                                 backgroundColor: tarefa.custo >= 1000 ? 'yellow' : 'transparent',
-                                textDecoration: tarefa.concluida ? 'line-through' : 'none', // Risco para tarefa concluída
-                                opacity: tarefa.concluida ? 0.6 : 1, // Visual para concluído
+                                textDecoration: tarefa.concluida ? 'line-through' : 'none', 
+                                opacity: tarefa.concluida ? 0.6 : 1, 
                             }}
                             key={tarefa.id}
                         >
